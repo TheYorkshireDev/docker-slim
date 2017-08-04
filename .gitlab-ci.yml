@@ -1,5 +1,5 @@
-# Use Steven Cooney's minimal docker image.
-image: stevencooney/docker-slim:latest
+# Build using the previous version
+image: theyorkshiredev/docker-slim:latest
 
 # Since we building docker images within a docker container we need the
 # docker in docker service.
@@ -10,7 +10,7 @@ stages:
   - build
   - test
   - publish
-  - release
+  # - release
 
 # Log in to Gitlab's docker registry
 before_script:
@@ -56,16 +56,19 @@ github_publish:
   only:
     - tags
 
+# Dockerhub does not allow multi-stage docker builds follow issue:
+# https://github.com/docker/hub-feedback/issues/1039
+
 # If the publish to github completed release the image on dockerhub
-dockerhub_release:
-  image: stevencooney/droplet-configuration
-  stage: release
-  script:
-    - echo "Release to Dockerhub."
-    - echo \{\"source_type\":\"Tag\",\"source_name\":\"\$CI_COMMIT_TAG\"\} > tag-template.json
-    - envsubst < tag-template.json > tag-body.json
-    - 'curl -X POST -H "Content-Type: application/json" -d "@./tag-body.json" "$RELEASE_URL"'
-  only:
-    - tags
-  dependencies:
-    - github_publish
+# dockerhub_release:
+#   image: stevencooney/droplet-configuration
+#   stage: release
+#   script:
+#     - echo "Release to Dockerhub."
+#     - echo \{\"source_type\":\"Tag\",\"source_name\":\"\$CI_COMMIT_TAG\"\} > tag-template.json
+#     - envsubst < tag-template.json > tag-body.json
+#     - 'curl -X POST -H "Content-Type: application/json" -d "@./tag-body.json" "$RELEASE_URL"'
+#   only:
+#     - tags
+#   dependencies:
+#     - github_publish

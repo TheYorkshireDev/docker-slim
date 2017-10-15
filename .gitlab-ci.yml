@@ -41,8 +41,6 @@ test_installed_apps:
     - docker run -i $COMMIT_IMAGE /bin/sh -c 'docker --version'
 
 # Lint our Dockerfile
-# Cannot run linting becuase it is not supported on multistage builds
-# see: https://github.com/replicatedhq/dockerfilelint/issues/74
 lint_dockerfile:
   image: theyorkshiredev/dockerfile-linter:latest
   stage: test

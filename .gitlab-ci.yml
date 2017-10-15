@@ -43,11 +43,11 @@ test_installed_apps:
 # Lint our Dockerfile
 # Cannot run linting becuase it is not supported on multistage builds
 # see: https://github.com/replicatedhq/dockerfilelint/issues/74
-# lint_dockerfile:
-#   image: theyorkshiredev/dockerfile-linter:latest
-#   stage: test
-#   script:
-#     - dockerfilelint Dockerfile
+lint_dockerfile:
+  image: theyorkshiredev/dockerfile-linter:latest
+  stage: test
+  script:
+    - dockerfilelint Dockerfile
 
 # If the build is on master mirror on GitHub
 github_publish:
@@ -72,8 +72,6 @@ publish:
     - tags
 
 # If the publish to github completed, release the image on dockerhub
-# Dockerhub does not allow multi-stage docker builds follow issue:
-# https://github.com/docker/hub-feedback/issues/1039
 dockerhub_release:
   image: theyorkshiredev/trigger-dockerhub-build:latest
   stage: release

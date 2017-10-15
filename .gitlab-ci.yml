@@ -74,13 +74,13 @@ publish:
 # If the publish to github completed, release the image on dockerhub
 # Dockerhub does not allow multi-stage docker builds follow issue:
 # https://github.com/docker/hub-feedback/issues/1039
-# dockerhub_release:
-#   image: theyorkshiredev/trigger-dockerhub-build:latest
-#   stage: release
-#   script:
-#     - echo "Release to Dockerhub."
-#     - release $CI_COMMIT_TAG $RELEASE_URL
-#   only:
-#     - tags
-#   dependencies:
-#     - github_publish
+dockerhub_release:
+  image: theyorkshiredev/trigger-dockerhub-build:latest
+  stage: release
+  script:
+    - echo "Release to Dockerhub."
+    - release $CI_COMMIT_TAG $RELEASE_URL
+  only:
+    - tags
+  dependencies:
+    - github_publish

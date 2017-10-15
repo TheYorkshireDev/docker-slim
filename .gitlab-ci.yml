@@ -10,7 +10,7 @@ stages:
   - build
   - test
   - publish
-  # - release
+  - release
 
 # Log in to Gitlab's docker registry
 before_script:

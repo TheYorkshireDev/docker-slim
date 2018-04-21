@@ -1,7 +1,7 @@
 #
 # Lightweight Docker in Docker image
 #
-# (c) 2017 - Steven Cooney
+# (c) 2018 - Steven Cooney
 ########################################################
 
 FROM docker:18.04.0-ce as builder

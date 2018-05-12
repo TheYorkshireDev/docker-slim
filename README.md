@@ -2,7 +2,7 @@
 
 A lightweight docker in docker image.
 
-This image has the latest core docker scripts. The reason behind this image is a lightweight alternative to the full docker image for build pipelines.
+This image has the latest core docker scripts (18.05.0-ce). The reason behind this image is a lightweight alternative to the full docker image for build pipelines.
 
 ## Benefits:
 
